@@ -1,125 +1,134 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>TAPLY - Beauty House</title>
+    <title>TAPLY</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
             background: #f5f5f5;
-            color: #222;
-        }
-
-        .container {
-            max-width: 420px;
-            margin: auto;
-            min-height: 100vh;
-            padding: 35px 20px;
             text-align: center;
         }
 
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
         .logo {
-            width: 90px;
-            height: 90px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background: #222;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 22px;
-            font-weight: bold;
+            object-fit: cover;
         }
 
         h1 {
-            font-size: 26px;
-            margin-bottom: 8px;
+            margin-top: 20px;
         }
 
         .description {
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .button {
             display: block;
-            text-decoration: none;
-            color: white;
-            background: #222;
             padding: 16px;
             margin: 12px 0;
+            background: white;
+            color: #222;
+            text-decoration: none;
             border-radius: 12px;
-            font-size: 16px;
             font-weight: bold;
         }
 
         .review {
-            background: #f5b400;
-            color: #111;
-        }
-
-        .taply {
-            margin-top: 35px;
-            font-size: 13px;
-            color: #999;
-            letter-spacing: 2px;
+            background: #222;
+            color: white;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <div class="logo">
-            TAPLY
-        </div>
+    <img id="logo" class="logo">
 
-        <h1>nom du commerce</h1>
+    <h1 id="nom"></h1>
 
-        <p class="description">
-            description • Alger
-        </p>
+    <p id="description" class="description"></p>
 
-        <a class="button" href="https://wa.me/213540509006">
-            💬 WhatsApp
-        </a>
+    <a id="google" class="button review" target="_blank">
+        ⭐ Laisser un avis Google
+    </a>
 
-        <a class="button" href="https://instagram.com/">
-            📸 Instagram
-        </a>
+    <a id="telephone" class="button">
+        📞 Appeler
+    </a>
 
-        <a class="button review" href="https://www.google.com/">
-            ⭐ Avis Google
-        </a>
+    <a id="instagram" class="button" target="_blank">
+        📷 Instagram
+    </a>
 
-        <a class="button" href="tel:+213540509006">
-            📞 Appeler
-        </a>
+    <a id="maps" class="button" target="_blank">
+        📍 Nous trouver
+    </a>
 
-        <a class="button" href="https://maps.google.com/">
-            📍 Nous trouver
-        </a>
+    <a id="site" class="button" target="_blank">
+        🌐 Site web
+    </a>
 
-        <a class="button" href="https://google.com/">
-            🌐 Site web
-        </a>
+    <p>Powered by TAPLY</p>
 
-        <div class="taply">
-            TAPLY
-        </div>
+</div>
 
-    </div>
+<script src="clients.js"></script>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+const client = clients[id];
+
+if (client) {
+
+    document.getElementById("logo").src = client.logo;
+
+    document.getElementById("nom").textContent = client.nom;
+
+    document.getElementById("description").textContent =
+        client.description;
+
+    document.getElementById("google").href =
+        client.google;
+
+    document.getElementById("telephone").href =
+        "tel:" + client.telephone;
+
+    document.getElementById("instagram").href =
+        client.instagram;
+
+    document.getElementById("maps").href =
+        client.maps;
+
+    document.getElementById("site").href =
+        client.site;
+
+} else {
+
+    document.querySelector(".container").innerHTML =
+        "<h1>Commerce introuvable</h1>" +
+        "<p>Identifiant TAPLY incorrect.</p>";
+}
+
+</script>
 
 </body>
 </html>
